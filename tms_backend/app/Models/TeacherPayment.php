@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 03 Mar 2019 15:58:36 +0000.
+ * Date: Mon, 04 Mar 2019 14:17:25 +0000.
  */
 
 namespace App\Models;
@@ -15,7 +15,8 @@ use Reliese\Database\Eloquent\Model as Eloquent;
  * @property int $idteacher_payment
  * @property int $admin_idadmin
  * @property \Carbon\Carbon $issue_date
- * @property \Carbon\Carbon $update_time
+ * @property \Carbon\Carbon $updated_at
+ * @property int $amount
  * 
  * @property \App\Models\Admin $admin
  * @property \Illuminate\Database\Eloquent\Collection $class_logs
@@ -28,17 +29,17 @@ class TeacherPayment extends Eloquent
 	public $timestamps = false;
 
 	protected $casts = [
-		'admin_idadmin' => 'int'
+		'admin_idadmin' => 'int',
+		'amount' => 'int'
 	];
 
 	protected $dates = [
-		'issue_date',
-		'update_time'
+		'issue_date'
 	];
 
 	protected $fillable = [
 		'issue_date',
-		'update_time'
+		'amount'
 	];
 
 	public function admin()

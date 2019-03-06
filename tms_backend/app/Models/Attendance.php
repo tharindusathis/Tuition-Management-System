@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 03 Mar 2019 15:58:36 +0000.
+ * Date: Mon, 04 Mar 2019 13:47:32 +0000.
  */
 
 namespace App\Models;
@@ -12,7 +12,6 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 /**
  * Class Attendance
  * 
- * @property int $idattendance
  * @property int $student_idstudent
  * @property int $class_log_idclass_log
  * @property int $state
@@ -28,6 +27,7 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 class Attendance extends Eloquent
 {
 	protected $table = 'attendance';
+	public $incrementing = false;
 	public $timestamps = false;
 
 	protected $casts = [

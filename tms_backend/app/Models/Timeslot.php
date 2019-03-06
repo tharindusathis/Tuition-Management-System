@@ -2,7 +2,7 @@
 
 /**
  * Created by Reliese Model.
- * Date: Sun, 03 Mar 2019 15:58:36 +0000.
+ * Date: Mon, 04 Mar 2019 12:04:10 +0000.
  */
 
 namespace App\Models;
@@ -11,13 +11,14 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class Timeslot
- * 
+ *
  * @property int $idtimeslot
  * @property int $class_idclass
  * @property int $hall_idhall
  * @property bool $weekday
- * @property int $duration
- * 
+ * @property \Carbon\Carbon $start_time
+ * @property \Carbon\Carbon $end_time
+ *
  * @property \App\Models\Aclass $aclass
  * @property \App\Models\Hall $hall
  * @property \Illuminate\Database\Eloquent\Collection $class_logs
@@ -32,13 +33,18 @@ class Timeslot extends Eloquent
 	protected $casts = [
 		'class_idclass' => 'int',
 		'hall_idhall' => 'int',
-		'weekday' => 'bool',
-		'duration' => 'int'
+		'weekday' => 'bool'
+	];
+
+	protected $dates = [
+		//'start_time',
+		//'end_time'
 	];
 
 	protected $fillable = [
 		'weekday',
-		'duration'
+		'start_time',
+		'end_time'
 	];
 
 	public function aclass()

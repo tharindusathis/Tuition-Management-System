@@ -15,6 +15,8 @@ class StudentPaymentController extends Controller
     public function index()
     {
         //
+        $all = StudentPayment::all();
+       return response()->json(['all'=>$all], 200);
     }
 
     /**

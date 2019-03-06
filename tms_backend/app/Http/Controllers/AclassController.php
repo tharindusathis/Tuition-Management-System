@@ -14,7 +14,8 @@ class AclassController extends Controller
      */
     public function index()
     {
-        //
+        $all = Aclass::all();
+        return response()->json(['all'=>$all], 200);
     }
 
     /**

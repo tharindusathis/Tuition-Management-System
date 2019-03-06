@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        Mpociot\LaravelTestFactoryHelper\TestFactoryHelperServiceProvider::class,
         /*
          * Application Service Providers...
          */

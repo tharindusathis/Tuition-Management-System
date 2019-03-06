@@ -14,7 +14,8 @@ class EnrolmentController extends Controller
      */
     public function index()
     {
-        //
+        $all = Enrolment::all();
+       return response()->json(['all'=>$all], 200);
     }
 
     /**

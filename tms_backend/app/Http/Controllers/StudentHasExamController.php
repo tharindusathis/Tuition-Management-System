@@ -15,6 +15,8 @@ class StudentHasExamController extends Controller
     public function index()
     {
         //
+        $all = StudentHasExam::all();
+       return response()->json(['all'=>$all], 200);
     }
 
     /**

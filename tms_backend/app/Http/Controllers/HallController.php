@@ -14,7 +14,8 @@ class HallController extends Controller
      */
     public function index()
     {
-        //
+        $all = Hall::all();
+       return response()->json(['all'=>$all], 200);
     }
 
     /**

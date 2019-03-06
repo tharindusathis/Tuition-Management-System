@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Timeslot;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class TimeslotController extends Controller
 {
+    public function getStartTimeAttribute($value)
+    {
+        $this->attributes['start_time'] = Carbon\Carbon::createFromFormat('h:i:s', $value);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +19,11 @@ class TimeslotController extends Controller
      */
     public function index()
     {
-        //
+       $all = Timeslot::all();
+       return response()->json(['all'=>$all], 200);
+
     }
+
 
     /**
      * Show the form for creating a new resource.

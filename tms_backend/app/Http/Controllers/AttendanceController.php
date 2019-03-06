@@ -14,7 +14,8 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+        $all = Attendance::all();
+        return response()->json(['all'=>$all], 200);
     }
 
     /**

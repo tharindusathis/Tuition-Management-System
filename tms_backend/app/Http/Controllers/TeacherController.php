@@ -15,6 +15,9 @@ class TeacherController extends Controller
     public function index()
     {
         //
+       $all = Teacher::all();
+       return response()->json(['all'=>$all], 200);
+
     }
 
     /**

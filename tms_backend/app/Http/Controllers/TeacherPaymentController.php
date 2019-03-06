@@ -14,7 +14,9 @@ class TeacherPaymentController extends Controller
      */
     public function index()
     {
-        //
+         $all = TeacherPayment::all();
+       return response()->json(['all'=>$all], 200);
+
     }
 
     /**

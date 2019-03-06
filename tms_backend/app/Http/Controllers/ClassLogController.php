@@ -14,7 +14,8 @@ class ClassLogController extends Controller
      */
     public function index()
     {
-        //
+       $all = ClassLog::all();
+       return response()->json(['all'=>$all], 200);
     }
 
     /**
