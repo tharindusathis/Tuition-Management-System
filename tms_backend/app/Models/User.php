@@ -11,16 +11,14 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class User
- * 
+ *
  * @property string $username
  * @property string $email
  * @property string $password
  * @property \Carbon\Carbon $created_at
  * @property int $type
  * @property int $state
- * @property int $admin_idadmin
- * @property int $teacher_idteacher
- * @property int $student_idstudent
+ * @property int $used_id
  *
  * @package App\Models
  */
@@ -34,9 +32,7 @@ class User extends Eloquent
 	protected $casts = [
 		'type' => 'int',
 		'state' => 'int',
-		'admin_idadmin' => 'int',
-		'teacher_idteacher' => 'int',
-		'student_idstudent' => 'int'
+		'user_id' => 'int'
 	];
 
 	protected $hidden = [
@@ -48,8 +44,6 @@ class User extends Eloquent
 		'password',
 		'type',
 		'state',
-		'admin_idadmin',
-		'teacher_idteacher',
-		'student_idstudent'
+		'user_id'
 	];
 }

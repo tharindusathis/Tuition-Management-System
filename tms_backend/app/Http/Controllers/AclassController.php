@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Aclass;
 use Illuminate\Http\Request;
+use DB;
 
 class AclassController extends Controller
 {
@@ -14,7 +15,36 @@ class AclassController extends Controller
      */
     public function index()
     {
-        $all = Aclass::all();
+        //$all = Aclass::all();
+        $all = DB::select('
+            SELECT
+                aclass.idclass,
+                aclass.hourly_rate,
+                aclass.`name` AS class_name,
+                `subject`.`name` AS subject_name,
+                `subject`.`medium`,
+                `subject`.grade,
+                `subject`.syllabus_year,
+                concat( teacher.fname, " ", teacher.lname ) AS teacher_name,
+                teacher.join_date,
+                teacher.idteacher,
+                `subject`.idsubject
+            FROM
+                aclass
+                LEFT OUTER JOIN `subject` ON aclass.subject_idsubject = `subject`.idsubject
+                LEFT OUTER JOIN  teacher ON aclass.teacher_idteacher = teacher.idteacher
+        ');
+        foreach($all as $one){
+            $medium = $one->medium;
+            if($medium == "sin"){
+                $one->medium = "Sinhala";
+                //$one->_rowVariant = "danger";
+                //$one->_cellVariants = array('medium'=>'warning');
+            }else if($medium == "eng")
+                $one->medium = "English";
+            else if($medium == "tam")
+                $one->medium = "Tamil";
+        }
         return response()->json(['all'=>$all], 200);
     }
 
@@ -36,7 +66,7 @@ class AclassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Aclass::create($request->all());//
     }
 
     /**

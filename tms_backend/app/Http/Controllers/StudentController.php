@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use Illuminate\Http\Request;
+use DB;
+use Carbon\Carbon;
 
 class StudentController extends Controller
 {
@@ -14,7 +16,21 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $all = Student::all();
+        $all = DB::select('
+            SELECT
+                student.idstudent,
+                student.join_date,
+                student.contact_no,
+                student.parent_name,
+                student.parent_contatct_no,
+                concat(student.fname, " ", student.lname) AS student_name,
+                student.dob,
+                student.address,
+                student.notes,
+                student.full_name
+            FROM
+                student
+        ');
         return response()->json(['all'=>$all], 200);
     }
 
@@ -36,9 +52,11 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $join_date = Carbon::now()->toDateString();
+        $request['join_date'] = $join_date;
+        return Student::create($request->all());
     }
-
+    
     /**
      * Display the specified resource.
      *

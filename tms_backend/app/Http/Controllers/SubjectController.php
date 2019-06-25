@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use DB;
 
 class SubjectController extends Controller
 {
@@ -15,7 +16,25 @@ class SubjectController extends Controller
     public function index()
     {
         //
-       $all = Subject::all();
+       $all = DB::select('
+            SELECT
+                `subject`.idsubject,
+                `subject`.`name` AS subject_name,
+                `subject`.grade,
+                `subject`.syllabus_year,
+                `subject`.`medium`,
+                Count( aclass.subject_idsubject ) AS class_count,
+                Avg( aclass.hourly_rate ) AS avg_rate
+            FROM
+                `subject`
+                LEFT OUTER JOIN aclass ON aclass.subject_idsubject = `subject`.idsubject
+            GROUP BY
+                `subject`.idsubject,
+                `subject`.`name`,
+                `subject`.grade,
+                `subject`.syllabus_year,
+                `subject`.`medium`
+       ');
        return response()->json(['all'=>$all], 200);
 
     }
@@ -38,7 +57,7 @@ class SubjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Subject::create($request->all());
     }
 
     /**

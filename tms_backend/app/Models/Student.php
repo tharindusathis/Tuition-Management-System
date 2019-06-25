@@ -46,12 +46,13 @@ class Student extends Eloquent
 		'join_date',
 		'contact_no',
 		'parent_name',
-		'parent_contatct_no',
+		'parent_contact_no',
 		'address',
 		'notes',
 		'fname',
 		'lname',
-		'full_name'
+		'full_name',
+		'join_date'
 	];
 
 	public function attendances()

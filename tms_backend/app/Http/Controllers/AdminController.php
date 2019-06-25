@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -36,7 +37,9 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $join_date = Carbon::now()->toDateString();
+        $request['join_date'] = $join_date;
+        return Admin::create($request->all());
     }
 
     /**

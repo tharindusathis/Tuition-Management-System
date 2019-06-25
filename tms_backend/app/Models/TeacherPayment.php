@@ -11,13 +11,13 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class TeacherPayment
- * 
+ *
  * @property int $idteacher_payment
  * @property int $admin_idadmin
  * @property \Carbon\Carbon $issue_date
  * @property \Carbon\Carbon $updated_at
  * @property int $amount
- * 
+ *
  * @property \App\Models\Admin $admin
  * @property \Illuminate\Database\Eloquent\Collection $class_logs
  *
@@ -49,6 +49,6 @@ class TeacherPayment extends Eloquent
 
 	public function class_logs()
 	{
-		return $this->hasMany(\App\Models\ClassLog::class, 'teacher_payment_idteacher_payment');
+		return $this->belongsTo(\App\Models\ClassLog::class, 'teacher_payment_idteacher_payment');
 	}
 }

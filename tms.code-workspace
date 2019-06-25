@@ -2,7 +2,15 @@
 	"folders": [
 		{
 			"path": "tms_backend"
+		},
+		{
+			"path": "A:\\bootstrapProjects\\coreui-free-vue-admin-template - editing"
+		},
+		{
+			"path": "A:\\bootstrapProjects\\tms_frontend"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "tms_frontend"
+	}
 }

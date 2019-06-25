@@ -34,13 +34,15 @@ class Aclass extends Eloquent
 
 	protected $casts = [
 		'teacher_idteacher' => 'int',
-		'hourly_rate' => 'int',
 		'subject_idsubject' => 'int'
 	];
 
 	protected $fillable = [
 		'hourly_rate',
-		'name'
+		'name',
+		'teacher_idteacher',
+		'subject_idsubject',
+		'institute_rate'
 	];
 
 	public function subject()

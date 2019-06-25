@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Timeslot;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use DB;
 
 class TimeslotController extends Controller
 {
@@ -19,7 +20,26 @@ class TimeslotController extends Controller
      */
     public function index()
     {
-       $all = Timeslot::all();
+        $all = DB::select('
+            SELECT
+                timeslot.idtimeslot,
+                timeslot.weekday,
+                timeslot.start_time,
+                timeslot.end_time,
+                hall.`name` AS hall_name,
+                hall.idhall,
+                aclass.idclass,
+                aclass.`name` AS class_name,
+                `subject`.`name` AS subject_name,
+                `subject`.idsubject,
+                `subject`.grade,
+                aclass.hourly_rate
+            FROM
+                timeslot
+                LEFT OUTER JOIN hall ON timeslot.hall_idhall = hall.idhall
+                LEFT OUTER JOIN aclass ON timeslot.class_idclass = aclass.idclass
+                LEFT OUTER JOIN `subject` ON aclass.subject_idsubject = `subject`.idsubject
+       ');
        return response()->json(['all'=>$all], 200);
 
     }

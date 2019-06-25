@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Hall;
 use Illuminate\Http\Request;
+use DB;
 
 class HallController extends Controller
 {
@@ -14,7 +15,20 @@ class HallController extends Controller
      */
     public function index()
     {
-        $all = Hall::all();
+       $all = DB::select('
+            SELECT
+                hall.idhall,
+                hall.`name` AS `hall_name`,
+                hall.note,
+                Count( timeslot.hall_idhall ) AS `timeslot_count`
+            FROM
+                hall
+                LEFT OUTER JOIN timeslot ON timeslot.hall_idhall = hall.idhall
+            GROUP BY
+                hall.idhall,
+                hall.`name`,
+                hall.note
+       ');
        return response()->json(['all'=>$all], 200);
     }
 
@@ -36,7 +50,7 @@ class HallController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Hall::create($request->all());
     }
 
     /**

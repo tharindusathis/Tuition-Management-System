@@ -11,14 +11,14 @@ use Reliese\Database\Eloquent\Model as Eloquent;
 
 /**
  * Class ClassLog
- * 
+ *
  * @property int $idclass_log
  * @property int $class_idclass
  * @property int $timeslot_idtimeslot
  * @property \Carbon\Carbon $date
  * @property int $teacher_payment_idteacher_payment
  * @property int $payed_to_teacher
- * 
+ *
  * @property \App\Models\Aclass $aclass
  * @property \App\Models\TeacherPayment $teacher_payment
  * @property \App\Models\Timeslot $timeslot
@@ -55,7 +55,7 @@ class ClassLog extends Eloquent
 
 	public function teacher_payment()
 	{
-		return $this->belongsTo(\App\Models\TeacherPayment::class, 'teacher_payment_idteacher_payment');
+		return $this->hasOne(\App\Models\TeacherPayment::class, 'teacher_payment_idteacher_payment');
 	}
 
 	public function timeslot()

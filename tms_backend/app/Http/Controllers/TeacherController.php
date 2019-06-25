@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use DB;
+use Carbon\Carbon;
 
 class TeacherController extends Controller
 {
@@ -15,7 +17,22 @@ class TeacherController extends Controller
     public function index()
     {
         //
-       $all = Teacher::all();
+       $all = DB::Select('
+            SELECT
+                teacher.idteacher,
+                concat( teacher.fname, " ", teacher.lname ) AS teacher_name,
+                teacher.nic,
+                teacher.join_date,
+                Count( aclass.idclass ) AS `class_count`,
+                Avg( aclass.hourly_rate ) AS `avg_rate`
+            FROM
+                teacher
+                LEFT OUTER JOIN aclass ON aclass.teacher_idteacher = teacher.idteacher
+            GROUP BY
+                teacher.idteacher,
+                teacher.nic,
+                teacher.join_date
+       ');
        return response()->json(['all'=>$all], 200);
 
     }
@@ -38,7 +55,9 @@ class TeacherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $join_date = Carbon::now()->toDateString();
+        $request['join_date'] = $join_date;
+        return Teacher::create($request->all());
     }
 
     /**
