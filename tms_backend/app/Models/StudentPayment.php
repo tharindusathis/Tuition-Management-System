@@ -39,7 +39,8 @@ class StudentPayment extends Eloquent
 
 	protected $fillable = [
 		'issue_date',
-		'amount'
+		'amount',
+        'admin_idadmin'
 	];
 
 	public function admin()

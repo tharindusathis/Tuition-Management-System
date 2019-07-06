@@ -57,7 +57,7 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Exam::create($request->all());
     }
 
     /**

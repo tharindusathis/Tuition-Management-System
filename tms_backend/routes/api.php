@@ -42,6 +42,9 @@ Route::get('/all_hall',[
 Route::get('/all_student',[
     'uses' => 'StudentController@index'
 ]);
+Route::get('/all_student_min',[
+    'uses' => 'StudentController@index_min'
+]);
 Route::get('/all_student_payment',[
     'uses' => 'StudentPaymentController@index'
 ]);
@@ -206,4 +209,20 @@ Route::delete('/timeslot',[
 ]);
 Route::delete('/user',[
     'uses' => 'UserController@delete'
+]);
+
+
+
+
+Route::get('student_in_class/{id}', 'StudentController@inClass');
+Route::get('student_not_in_class/{id}', 'StudentController@notInClass');
+Route::get('student_unpayed/{id}', 'StudentController@unpayed');
+Route::post('student_pay', 'StudentController@  pay');
+Route::post('add_student/{id}', 'AclassController@add_student');
+
+Route::get('/one_class/{id}',[
+    'uses' => 'AclassController@oneClass'
+]);
+Route::get('/one_student/{id}',[
+    'uses' => 'StudentController@oneClass'
 ]);

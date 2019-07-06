@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\StudentPayment;
 use Illuminate\Http\Request;
 use DB;
+use Carbon\Carbon;
 
 class StudentPaymentController extends Controller
 {
@@ -17,31 +18,20 @@ class StudentPaymentController extends Controller
     {
         //
         $all = DB::select('
-            SELECT
-                concat( admin.fname, " ", admin.lname ) AS admin_name,
-                concat( student.fname, " ", student.lname ) AS student_name,
-                student_payment.idstudent_payment,
-                student_payment.updated_at,
-                student_payment.issue_date,
-                student_payment.amount,
-                admin.idadmin,
-                Count( attendance.student_payment_idstudent_payment ) AS attendance_count,
-                student.idstudent,
-                aclass.`name` AS class_name,
-                aclass.idclass
+           SELECT
+            student.idstudent,
+            student_payment.admin_idadmin,
+            concat( admin.fname, " ", admin.lname ) AS admin_name,
+            concat( student.fname, " ", student.lname ) AS student_name,
+            student_payment.idstudent_payment,
+            student_payment.updated_at,
+            student_payment.amount,
+            admin.idadmin
             FROM
-                student_payment
-                LEFT OUTER JOIN admin ON student_payment.admin_idadmin = admin.idadmin
-                LEFT OUTER JOIN attendance ON attendance.student_payment_idstudent_payment = student_payment.idstudent_payment
-                LEFT OUTER JOIN student ON attendance.student_idstudent = student.idstudent
-                LEFT OUTER JOIN class_log ON attendance.class_log_idclass_log = class_log.idclass_log
-                LEFT OUTER JOIN aclass ON class_log.class_idclass = aclass.idclass
-            GROUP BY
-                student_payment.idstudent_payment,
-                student_payment.updated_at,
-                student_payment.issue_date,
-                student_payment.amount,
-                admin.idadmin
+            student_payment
+            INNER JOIN student ON student_payment.student_idstudent = student.idstudent
+            INNER JOIN admin ON student_payment.admin_idadmin = admin.idadmin
+
         ');
        return response()->json(['all'=>$all], 200);
     }
@@ -64,7 +54,9 @@ class StudentPaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //$date = Carbon::now()->toDateString();
+        //$request['issue_date'] = $date;
+        return StudentPayment::create($request->all());
     }
 
     /**

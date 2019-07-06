@@ -56,7 +56,7 @@ class AttendanceController extends Controller
      * @param  \App\Models\Attendance  $attendance
      * @return \Illuminate\Http\Response
      */
-    public function edit(Attendance $attendance)
+            public function edit(Attendance $attendance)
     {
         //
     }
@@ -69,6 +69,11 @@ class AttendanceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Attendance $attendance)
+    {
+        //
+    }
+    
+    public function pay(Request $request, )
     {
         //
     }

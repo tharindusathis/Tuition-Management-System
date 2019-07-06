@@ -63,7 +63,7 @@ class TimeslotController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return Timeslot::create($request->all());
     }
 
     /**

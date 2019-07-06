@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Enrolment;
 use Illuminate\Http\Request;
 
+use Carbon\Carbon;
+
 class EnrolmentController extends Controller
 {
     /**
@@ -36,7 +38,9 @@ class EnrolmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $join_date = Carbon::now()->toDateString();
+        $request['date_joined'] = $join_date;
+        return Student::create($request->all());
     }
 
     /**

@@ -89,7 +89,7 @@ class ClassLogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return ClassLog::create($request->all());
     }
 
     /**
