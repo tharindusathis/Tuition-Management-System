@@ -217,7 +217,9 @@ Route::delete('/user',[
 Route::get('student_in_class/{id}', 'StudentController@inClass');
 Route::get('student_not_in_class/{id}', 'StudentController@notInClass');
 Route::get('student_unpayed/{id}', 'StudentController@unpayed');
-Route::post('student_pay', 'StudentController@  pay');
+Route::get('teacher_unpayed/{id}', 'TeacherPaymentController@unpayed');
+Route::post('student_pay', 'StudentController@pay');
+Route::post('teacher_pay', 'TeacherPaymentController@set_payment');
 Route::post('add_student/{id}', 'AclassController@add_student');
 
 Route::get('/one_class/{id}',[
@@ -226,3 +228,17 @@ Route::get('/one_class/{id}',[
 Route::get('/one_student/{id}',[
     'uses' => 'StudentController@oneClass'
 ]);
+
+Route::group([
+    'prefix' => 'auth'
+], function () {
+    Route::post('login', 'AuthController@login');
+    Route::post('signup', 'AuthController@signup');
+  
+    Route::group([
+      'middleware' => 'auth:api'
+    ], function() {
+        Route::get('logout', 'AuthController@logout');
+        Route::get('user', 'AuthController@user');
+    });
+});

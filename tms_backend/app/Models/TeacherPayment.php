@@ -39,6 +39,8 @@ class TeacherPayment extends Eloquent
 
 	protected $fillable = [
 		'issue_date',
+        'admin_idadmin' ,
+        'class_log_idclass_log',
 		'amount'
 	];
 
